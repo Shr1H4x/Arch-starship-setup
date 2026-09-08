@@ -4,11 +4,12 @@ A compact, boxed two-line Starship prompt for Arch Linux with the Omarchy
 shell. Every section is its own bracketed chip and colors reflect the live
 system state (power profile, battery level, network link).
 
-![prompt](https://img.shields.io/badge/shell-starship-purple)
-
+```
+╭─[ shr1h4x ] [ …/Universal_Downloader ] [ main ] ⇡3 [  v26.7.0 ] [  v3.14.7 ] [ 80% ] [ 󰌪 ] [ 󰈀 ] [ 17:42 ] ➤
+╰─❯
+```
 
 ![Screenshot](/starship.png)
-
 
 ## Features
 
@@ -55,15 +56,13 @@ Matching the Omarchy network panel:
 ## Install
 
 ```bash
-# 1. Copy the theme
-cp starship.toml ~/.config/starship.toml
-
-# 2. Copy the network helper script (used by the network chip)
+# 1. Copy the whole starship/ folder (config + helper script) into place
 mkdir -p ~/.config/starship
-cp nettype.sh ~/.config/starship/nettype.sh
+cp starship/starship.toml ~/.config/starship.toml
+cp starship/nettype.sh ~/.config/starship/nettype.sh
 chmod +x ~/.config/starship/nettype.sh
 
-# 3. Ensure starship is initialized in your shell
+# 2. Ensure starship is initialized in your shell
 # bash:  eval "$(starship init bash)"
 # zsh:   eval "$(starship init zsh)"
 # fish:  starship init fish | source
@@ -80,7 +79,8 @@ chmod +x ~/.config/starship/nettype.sh
 - **Live power color**: `custom.power` runs `powerprofilesctl get` and prints
   the icon wrapped in ANSI bold color codes; `unsafe_no_escape = true` lets
   starship pass the escapes through.
-- **Ethernet/wifi detection**: `nettype.sh` reads `nmcli -t device status`
+- **Ethernet/wifi detection**: the helper script `starship/nettype.sh`
+  (referenced by the `custom.net` chip) reads `nmcli -t device status`
   (`DEVICE:TYPE:STATE:CONN` → type is field 2) and picks the wifi strength
   icon with `floor(signal / 20)`.
 
