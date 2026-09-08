@@ -6,9 +6,9 @@ system state (power profile, battery level, network link).
 
 ![prompt](https://img.shields.io/badge/shell-starship-purple)
 
-```
 
-```
+![Screenshot](/starship.png)
+
 
 ## Features
 
